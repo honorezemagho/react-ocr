@@ -1,9 +1,46 @@
-import React from 'react';
+import React,  {
+  useEffect,
+  useState
+}from 'react';
 import './App.css';
 import Dropzone from 'react-dropzone-uploader';
+import {
+  createWorker
+} from "tesseract.js";
+
 
 
 function App () {
+
+  const [ text, setText] = useState(null);
+
+  const [imageUrl] = useState(null);
+
+
+  useEffect(() => {
+    if (imageUrl != null) {
+      ExtractTextFromImage();
+    }
+});
+
+  const worker = createWorker({
+    logger: (m) => console.log(m),
+});
+
+const ExtractTextFromImage = async (imageUrl) => {
+  await worker.load();
+  await worker.loadLanguage("eng");
+  await worker.initialize("eng");
+  const {
+      data: {
+          text
+      },
+      
+  } = await worker.recognize(imageUrl);
+  setText(text);
+  await worker.terminate();
+};
+
 
  const getUploadParams = () => {
     return {
@@ -15,7 +52,9 @@ function App () {
     meta
 }, status) => {
     if (status === 'headers_received') {
-      alert("Uploaded")
+      alert("Uploaded");
+      setText("Reconizing...");
+      ExtractTextFromImage(meta.previewUrl);
     } else if (status === 'aborted') {
       alert("Something went wrong")
     }
@@ -57,7 +96,7 @@ function App () {
         }
         /> 
       <div className = "container text-center pt-5" >
-        <div id="toast" ></div>  
+          {text}
         </div> 
 
 </React.Fragment>
