@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Ocr
+Optical Character Recognition usign React and Tesseract.js
 
 ## Available Scripts
 
