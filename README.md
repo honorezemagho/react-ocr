@@ -180,7 +180,7 @@ ExtractTextFromImage(meta.url);
 }
 ```
 
-Enfin ajouter une **div** ou le texte extraitsera affiché
+Enfin ajouter une **div** ou le texte extrait sera affiché
 
 ```
   <div className = "container text-center pt-5" >
