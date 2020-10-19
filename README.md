@@ -88,12 +88,17 @@ function App () {
       canCancel = {
           false
       }
-        inputContent = "Drop A File"
+        accept = "image/jpeg, image/png, image/jpg"
+        inputContent = {
+            (files,extra) => (extra.reject ? 'Only PNG and JPG Image files are allowed' : 'Drop  image here')
+        }
         styles = {
             {
                 dropzoneActive: {
                     borderColor: 'green'
                 },
+                dropzoneReject: { borderColor: 'red', backgroundColor: '#DAA' },
+                    inputLabel: (files, extra) => (extra.reject ? { color: 'red' } : {}),
             }
         }
         /> 
