@@ -61,21 +61,15 @@ function App() {
     }
 
 
-    return ( <
-        React.Fragment >
+    return ( <React.Fragment>
 
-        <
-        nav className = "navbar navbar-light bg-light justify-content-center mt-3" >
-        <
-        a className = "navbar-brand"
-        href = "/" > React OCR < /a><br/ >
-        <
-        p > Optical Character Recognition with React and Tesseract.js < /p>  < /
-        nav >
+        <nav className = "navbar navbar-light bg-light justify-content-center mt-3" >
+        <a className = "navbar-brand" href = "/" > React OCR </a><br/ >
+        <p> Optical Character Recognition with React and Tesseract.js </p>  
+        </nav >
 
 
-        <
-        Dropzone getUploadParams = {
+        <Dropzone getUploadParams = {
             getUploadParams
         }
         onChangeStatus = {
@@ -103,14 +97,11 @@ function App() {
                     inputLabel: (files, extra) => (extra.reject ? { color: 'red' } : {}),
             }
         }
-        />  <
-        div className = "container text-center pt-5" > {
+        />  <div className = "container text-center pt-5" > {
             text
-        } <
-        /div> 
+        } </div> 
 
-        <
-        /React.Fragment>
+        </React.Fragment>
     )
 };
 
