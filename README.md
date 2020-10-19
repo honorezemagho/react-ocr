@@ -1,69 +1,111 @@
 # React-Ocr
-Optical Character Recognition usign React and Tesseract.js
+Reconnaissance de Charactères Optiques utilisant React et Tesseract.js
 
-## Available Scripts
+## Introdution
+Selon **Wikipédia** La reconnaissance optique de caractères (ROC), en anglais optical character recognition (OCR), ou océrisation, désigne les procédés informatiques pour la traduction d'images de textes imprimés ou dactylographiés en fichiers de texte.
 
-In the project directory, you can run:
+Ajourd'hui nous allons l'implémenter en utilisant [React](https://reactjs.org) et[Tesseract.js](https://tesseract.projectnaptha.com).
 
-### `npm start`
+### `Prérequis`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Nodejs](https://nodejs.org/) version **8.10** or Supérieure.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### `Installation`
 
-### `npm test`
+A l'aide de [create-react-app](https://create-react-app.dev/docs/getting-started) nous allons créer un nouveau Projet React.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+````
+npx create-react-app react-ocr
+cd react-ocr
+npm start
+````
 
-### `npm run build`
+Pour l'interface Utilisateur, nous allons utiliser [Bootstrap](https://getbootstrap.com) et pour l'upload le packet npm [**React Dropzone Uploader**](https://react-dropzone-uploader.js.org/).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install --save bootstrap react-dropzone-uploader
+```
+et importer les fichier de style dans le fichier `src/index.js` 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-dropzone-uploader/dist/styles.css';
+```
+ensuite dans le fichier src/App.js nous allons importer 
+```
+import Dropzone from 'react-dropzone-uploader';
+``` 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+et remplacer notre component app pour etre comme celui ci-dessous
+``````
+import React from 'react';
+import './App.css';
+import Dropzone from 'react-dropzone-uploader';
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+function App () {
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ const getUploadParams = () => {
+    return {
+        url: 'https://httpbin.org/post'
+    }
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ const handleChangeStatus = ({
+    meta
+}, status) => {
+    if (status === 'headers_received') {
+      alert("Uploaded")
+    } else if (status === 'aborted') {
+      alert("Something went wrong")
+    }
+}
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+    return (
+      <React.Fragment >
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+        <nav className = "navbar navbar-light bg-light justify-content-center mt-3">
+            <a className = "navbar-brand" href = "/" > React OCR </a><br/>
+            <p> Optical Character Recognition with React and Tesseract.js </p> 
+        </nav>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+        <Dropzone 
+        getUploadParams = {
+         getUploadParams
+      }
+      onChangeStatus = {
+          handleChangeStatus
+      }
+      maxFiles = {
+          1
+      }
+      multiple = {
+          false
+      }
+      canCancel = {
+          false
+      }
+        inputContent = "Drop A File"
+        styles = {
+            {
+                dropzoneActive: {
+                    borderColor: 'green'
+                },
+            }
+        }
+        /> 
+      <div className = "container text-center pt-5" >
+        <div id="toast" ></div>  
+        </div> 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+</React.Fragment>
+    )
+};
 
-### Analyzing the Bundle Size
+export default App;
+``````
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+L'application dans le navigateur ressemblera à ceci.
+![basic-ui](https://dev-to-uploads.s3.amazonaws.com/i/behr31s6ct43ljzd06xo.png)
