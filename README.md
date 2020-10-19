@@ -20,6 +20,7 @@ cd react-ocr
 npm start
 ````
 
+### `Template et Fonctionnamité D'upload`
 Pour l'interface Utilisateur, nous allons utiliser [Bootstrap](https://getbootstrap.com) et pour l'upload le packet npm [**React Dropzone Uploader**](https://react-dropzone-uploader.js.org/).
 
 ```
@@ -108,4 +109,81 @@ export default App;
 ``````
 
 L'application dans le navigateur ressemblera à ceci.
-![basic-ui](https://dev-to-uploads.s3.amazonaws.com/i/behr31s6ct43ljzd06xo.png)
+![basic-ui](https://dev-to-uploads.s3.amazonaws.com/i/behr31s6ct43ljzd06xo.png).
+
+
+### `Extraction du texte de l'image`
+
+Nous allons maintenant ajouter [Tesseract.js](https://tesseract.projectnaptha.com/).
+```
+npm install tesseract.js
+```
+Après nous allons importer la fonction  **createWorker** de **Tesseract** dans le fichier `src/App.js`.
+
+```
+import {createWorker} from "tesseract.js";
+```
+A l'intérieur de la fonction **App()**, nous allons maintenant ajouter une fonction extraire le texte de l'image.  
+
+Premièrement nous allons importer les Hook React **useEffect et useState**
+```
+ import React,{useEffect,useState} from "react";
+```
+ensuite ajouter ce code 
+
+```
+ const [ text, setText] = useState(null);
+
+ const [imageUrl] = useState(null);
+
+ useEffect(() => {
+        if (imageUrl != null) {
+            ExtractTextFromImage();
+        }
+    });
+```
+
+Par la suite, nous allons ajouter ce code permettant d'extraire l'image du texte
+
+```
+  const worker = createWorker({
+    logger: (m) => console.log(m),
+});
+
+const ExtractTextFromImage = async (imageUrl) => {
+  await worker.load();
+  await worker.loadLanguage("eng");
+  await worker.initialize("eng");
+  const {
+      data: {
+          text
+      },
+  } = await worker.recognize(imageUrl);
+  setText(text);
+  await worker.terminate();
+};
+```
+
+Ensuite mettre à jour la fonction ``handlechangeStatus` dans la fonction **App**
+
+```
+const handleChangeStatus = ({
+    meta
+}, status) => {
+    if (status === 'headers_received') {
+      alert("Uploaded");
+      setText("Recognizing...");
+ExtractTextFromImage(meta.url);
+    } else if (status === 'aborted') {
+      alert("Something went wrong")
+    }
+}
+```
+
+Enfin ajouter une **div** ou le texte extraitsera affiché
+
+```
+  <div className = "container text-center pt-5" >
+          {text}
+  </div> 
+```
