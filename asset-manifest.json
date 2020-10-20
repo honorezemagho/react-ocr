@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-ocr/static/css/main.5f361e03.chunk.css",
+    "main.js": "/react-ocr/static/js/main.ad139656.chunk.js",
+    "main.js.map": "/react-ocr/static/js/main.ad139656.chunk.js.map",
+    "runtime-main.js": "/react-ocr/static/js/runtime-main.7d905dfe.js",
+    "runtime-main.js.map": "/react-ocr/static/js/runtime-main.7d905dfe.js.map",
+    "static/css/2.e28dc06a.chunk.css": "/react-ocr/static/css/2.e28dc06a.chunk.css",
+    "static/js/2.89b96aa5.chunk.js": "/react-ocr/static/js/2.89b96aa5.chunk.js",
+    "static/js/2.89b96aa5.chunk.js.map": "/react-ocr/static/js/2.89b96aa5.chunk.js.map",
+    "index.html": "/react-ocr/index.html",
+    "precache-manifest.371c08bbe30542b7cb935b781ed3bc7f.js": "/react-ocr/precache-manifest.371c08bbe30542b7cb935b781ed3bc7f.js",
+    "service-worker.js": "/react-ocr/service-worker.js",
+    "static/css/2.e28dc06a.chunk.css.map": "/react-ocr/static/css/2.e28dc06a.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/react-ocr/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.89b96aa5.chunk.js.LICENSE.txt": "/react-ocr/static/js/2.89b96aa5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7d905dfe.js",
+    "static/css/2.e28dc06a.chunk.css",
+    "static/js/2.89b96aa5.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.ad139656.chunk.js"
+  ]
+}
